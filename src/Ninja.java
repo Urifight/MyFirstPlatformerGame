@@ -51,7 +51,6 @@ public class Ninja extends GameObject
 
         shurikenXVel = SHURIKEN_VELOCITY;
         setCenter(position);
-        System.out.println(position);
 
         if (rnd.nextBoolean())
             distanceOfAppearance = rnd.nextFloat(400, 600);
@@ -59,7 +58,6 @@ public class Ninja extends GameObject
         else
             distanceOfAppearance = rnd.nextFloat(-300, -100);
 
-        System.out.println(distanceOfAppearance);
 
         transform().setAccelerationY(3600);
 
@@ -70,14 +68,27 @@ public class Ninja extends GameObject
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        /*
+        the used variable checks that we did not activate the ninja
+        more than one time. so it fades in, throws the shuriken, and fades out
+        only one time.
+         */
+
+
         if (!used)
         {
+            // if the ninja's location is from the left of the player
+            // and the player has gotten into the position that is set for
+            // the ninja to appear, it will activate the ninja.
             if (distanceOfAppearance <= 0) {
                 if (player.getCenter().x() >= getCenter().x() + distanceOfAppearance) {
                     new ScheduledTask(this, 0.9f, false, this::activate);
                     used = true;
                 }
             }
+            // if the ninja's location is from the right of the player
+            // and the player has gotten into the position that is set for
+            // the ninja to appear, it will activate the ninja.
             else
             {
                 if (player.getCenter().x() >= getCenter().x() - distanceOfAppearance) {
@@ -90,17 +101,26 @@ public class Ninja extends GameObject
 
     private void activate()
     {
-
+        // we create a new task: when the ninja appears, it would take 0.5 seconds until it can kill
+        // it can kill when we set its tag to "enemy".
         new ScheduledTask(this, 0.5f, false, () -> setTag("enemy"));
 
+        //
         renderer().fadeIn(FADEIN_TIME, this::throwShuriken);
+
+        /*
+        if the ninja is from the right of the player, it would
+        turn the avatar to the left and the shuriken's speed
+        to the left.
+         */
         if (player.getCenter().x() < getCenter().x())
         {
             renderer().setIsFlippedHorizontally(true);
             shurikenXVel = -SHURIKEN_VELOCITY;
 
         }
-        
+
+        //after the ninja appears, it would take 1.5 seconds until it disappears and its object is removed.
         new ScheduledTask(this, 1.5f, false, () -> renderer().fadeOut(0.2f, () -> gameObjects.removeGameObject(this)));
     }
 
@@ -120,12 +140,17 @@ public class Ninja extends GameObject
 
     private void throwShuriken()
     {
+        // creating the shuriken and setting its center to the ninja's position
         shuriken = new Shuriken(Vector2.ZERO, new Vector2(SHURIKEN_SIZE, SHURIKEN_SIZE), shurikenImg);
         shuriken.setCenter(getCenter());
         gameObjects.addGameObject(shuriken);
         shuriken.transform().setVelocityX(shurikenXVel);
         float velocityY = calculateVelocityYShuriken();
+
+        // setting the shuriken its speed (meaning the ninja is throwing the shuriken)
         shuriken.transform().setVelocityY(velocityY);
+
+        // spinning the shuriken 360 degrees until it disappears
         new Transition<Float>(shuriken,
                 (angle) -> shuriken.renderer().setRenderableAngle(angle),
                 0f,

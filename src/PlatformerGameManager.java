@@ -74,7 +74,7 @@ public class PlatformerGameManager extends GameManager
         gameObjects().addGameObject(player);
         
         // Flag
-        Renderable flagImg = imageReader.readImage("Objects/Flag.png", true);
+        Renderable flagImg = imageReader.readImage("Avatar/Flag.png", true);
         GameObject flag = new Flag(Vector2.ZERO, new Vector2(FLAG_SIZE, FLAG_SIZE), flagImg, windowController);
         flag.setCenter(new Vector2(10625, windowDimensions.y() * 0.2f));
         gameObjects().addGameObject(flag);
@@ -119,6 +119,7 @@ public class PlatformerGameManager extends GameManager
         EnemiesFactory enemiesFactory = new EnemiesFactory(imageReader, windowDimensions, gameObjects(), player);
 
 
+
         enemiesFactory.createEnemy("enemy1", new Vector2(3200, windowDimensions.y() * 0.4f), 0);
 
         enemiesFactory.createEnemy("ninja", new Vector2(Vector2.ZERO), 0);
@@ -153,6 +154,8 @@ public class PlatformerGameManager extends GameManager
         enemiesFactory.createEnemy("enemy1", new Vector2(7700, 350f), 0);
         enemiesFactory.createEnemy("enemy1", new Vector2(8700, 350f), 0);
 
+        enemiesFactory.createEnemy("spikeBall", new Vector2(13150, windowDimensions.y() - 1800), 0);
+
     }
     private void createPlatforms(Vector2 windowDimensions)
     {
@@ -186,11 +189,35 @@ public class PlatformerGameManager extends GameManager
         PlatformMaker.placePlatform(Vector2.of(7950, windowDimensions.y() * 0.4f), new Vector2(300, 800), gameObjects(), "normal");
         PlatformMaker.placePlatform(Vector2.of(8850, windowDimensions.y() * 0.4f), new Vector2(1500, 800), gameObjects(), "normal");
 
-        PlatformMaker.placePlatform(Vector2.of(10550, windowDimensions.y() * 0.25f), new Vector2(150, 800), gameObjects(), "normal");
 
+        PlatformMaker.placePlatform(Vector2.of(10550, windowDimensions.y() - 600), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(10750, windowDimensions.y() - 700), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(10950, windowDimensions.y() - 800), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(11150, windowDimensions.y() - 900), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(11350, windowDimensions.y() - 1000), new Vector2(200, 1500), gameObjects(), "normal");
+
+        PlatformMaker.placePlatform(Vector2.of(11750, windowDimensions.y() - 1000), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(11750, windowDimensions.y() - 1050), new Vector2(200, 50), gameObjects(), "trampoline");
+
+        PlatformMaker.placePlatform(Vector2.of(12200, windowDimensions.y() - 1200), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(12200, windowDimensions.y() - 1250), new Vector2(200, 50), gameObjects(), "trampoline");
+
+        PlatformMaker.placePlatform(Vector2.of(12650, windowDimensions.y() - 1400), new Vector2(200, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(12650, windowDimensions.y() - 1450), new Vector2(200, 50), gameObjects(), "trampoline");
+
+        PlatformMaker.placePlatform(Vector2.of(13100, windowDimensions.y() - 1500), new Vector2(1400, 800), gameObjects(), "normal");
+
+        PlatformMaker.placePlatform(Vector2.of(14700, windowDimensions.y() - 1400), new Vector2(300, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(15200, windowDimensions.y() - 1300), new Vector2(300, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(15700, windowDimensions.y() - 1200), new Vector2(300, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(16200, windowDimensions.y() - 1100), new Vector2(300, 1500), gameObjects(), "normal");
+
+        PlatformMaker.placePlatform(Vector2.of(16700, windowDimensions.y() - 1000), new Vector2(600, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(17300, windowDimensions.y() - 900), new Vector2(100, 1500), gameObjects(), "normal");
+        PlatformMaker.placePlatform(Vector2.of(17400, windowDimensions.y() - 1000), new Vector2(600, 1500), gameObjects(), "normal");
 
         // lava
-        PlatformMaker.placePlatform(Vector2.of(windowDimensions.x()  * -2, windowDimensions.y()), new Vector2(windowDimensions.x() * 10, LavaYPos), gameObjects(), "lava");
+        PlatformMaker.placePlatform(Vector2.of(windowDimensions.x()  * -2, windowDimensions.y()), new Vector2(windowDimensions.x() * 15, LavaYPos), gameObjects(), "lava");
 
     }
 

@@ -1,6 +1,5 @@
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
-import danogl.collisions.Layer;
 import danogl.gui.ImageReader;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
@@ -8,6 +7,9 @@ import danogl.util.Vector2;
 public class EnemiesFactory {
     private static final float ENEMY_WIDTH = 75;
     private static final float ENEMY_HEIGHT = 75;
+
+    private static final float SPIKE_BALL_SIZE = 200;
+
     private ImageReader imageReader;
     private Vector2 windowDimenions;
     private GameObjectCollection gameObjects;
@@ -33,7 +35,9 @@ public class EnemiesFactory {
         Renderable enemyBlobImage = imageReader.readImage("Avatar/Blob.png", false);
         Renderable ninjaImg = imageReader.readImage("Avatar/Ninja.png", false);
 
-        Renderable shurikenImg = imageReader.readImage("Objects/Shuriken.png", false);
+        Renderable shurikenImg = imageReader.readImage("Avatar/Shuriken.png", false);
+
+        Renderable spikeBallImg = imageReader.readImage("Avatar/spikeBall.png", false);
 
         GameObject enemy = null;
         switch (enemyType) {
@@ -61,6 +65,10 @@ public class EnemiesFactory {
 
             case "spike":
                 enemy = new Spike(Vector2.ZERO, new Vector2(ENEMY_WIDTH, ENEMY_HEIGHT), spikeImg, position);
+                break;
+
+            case "spikeBall":
+                enemy = new SpikeBall(Vector2.ZERO, new Vector2(SPIKE_BALL_SIZE, SPIKE_BALL_SIZE), spikeBallImg, gameObjects, position, player);
                 break;
 
         }

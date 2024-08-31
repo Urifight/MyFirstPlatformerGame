@@ -22,6 +22,8 @@ public class PlatformInformation
 
         return returnedPlatform.get();
     }
+
+    //UNUSED FUNCTION
     public static GameObject findNearestPlatform(Vector2 positionOfCharacter, String direction)
     {
         GameObject currentPlatform = findThePlatform(positionOfCharacter);
@@ -37,6 +39,8 @@ public class PlatformInformation
         return newPlatform;
     }
 
+
+    // UNUSED FUNCTION FOR NOW
     public static boolean isThereAPlatform(Vector2 positionOfCharacter)
     {
         AtomicBoolean isPlatformExist = new AtomicBoolean(false);

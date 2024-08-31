@@ -26,6 +26,8 @@ public abstract class WalkingEnemy extends GameObject
         transform().setAccelerationY(600);
 
         setCenter(position);
+
+        // finding the platform that this character is standing on
         GameObject platform = PlatformInformation.findThePlatform(position);
 
         groundXPos = platform.getCenter().x();
